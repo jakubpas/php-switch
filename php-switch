@@ -6,7 +6,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 declare -A version
-version=(["php53"]="PHP 5.3.29" ["php5"]="PHP 5.59" ["php7"]="PHP 7.0.14")
+version=(["php53"]="PHP 5.3.29" ["php56"]="PHP 5.5.90" ["php7.1"]="PHP 7.1.11")
 
 apache="/var/run/apache2/apache2.pid"
 old=""
@@ -16,9 +16,9 @@ for key in "${!version[@]}"; do
   options+=("${version[$key]}")
 done
 
-if a2query -m php5  |& grep -q "[e]nabled" ; then old="php5";  fi
+if a2query -m php5  |& grep -q "[e]nabled" ; then old="php56";  fi
 if a2query -m php53 |& grep -q "[e]nabled" ; then old="php53"; fi
-if a2query -m php70 |& grep -q "[e]nabled" ; then old="php7";  fi
+if a2query -m php7.1 |& grep -q "[e]nabled" ; then old="php7.1";  fi
 
 if [ -e "$apache" ]
 then
